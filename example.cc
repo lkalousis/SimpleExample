@@ -161,7 +161,7 @@ Double_t _func( Double_t *x, Double_t *par )
 	}
            
       SRn *= TMath::Poisson( n, mu );
-      result += SRn; // n= 2-nlim
+      result += SRn; // n = 2-nlim
       
     } 
   
