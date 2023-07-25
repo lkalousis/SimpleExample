@@ -258,7 +258,7 @@ Int_t example()
   Float_t Q0 = 0.0;
   Float_t s0 = 21.0;
     
-  Float_t mu = 1.0;
+  Float_t mu = 0.5;
   
   Float_t Q = 120.0;
   Float_t s = 32.0;
