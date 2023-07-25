@@ -258,10 +258,10 @@ Int_t example()
   Float_t Q0 = 0.0;
   Float_t s0 = 21.0;
     
-  Float_t mu = 1.5;
+  Float_t mu = 1.0;
   
   Float_t Q = 120.0;
-  Float_t s = 35.0;
+  Float_t s = 32.0;
   Float_t alpha = 1.0/30.0;
   Float_t w = 0.2;
   
@@ -314,7 +314,27 @@ Int_t example()
   wbin = h1->GetBinWidth( 1 );
 
   h1->Fit( "ana", "", "", xmin, xmax );
+  
+  Double_t *pars = ana->GetParameters();
+  //const Double_t *erpars = ana->GetParErrors();
     
+  Double_t Qprime = pars[4];
+  Double_t sprime = pars[5];
+  Double_t aprime = pars[6];
+  Double_t wprime = pars[7];
+    
+  Double_t gn = 0.5*TMath::Erfc( -Qprime/( sqrt(2.0)*sprime ) );
+  Double_t k = sprime/gn/sqrt( 2.0*TMath::Pi() )*TMath::Exp( -pow( Qprime, 2.0 )/( 2.0*pow( sprime, 2.0 ) ) );
+  Double_t Qg = Qprime + k;
+
+  Double_t Qs = wprime/aprime + (1.0-wprime)*Qg;
+
+  cout << "" << endl;
+  cout << "" << endl;
+  
+  cout << " Gain = " << Qs << endl;
+  cout << "" << endl;
+  
   c1->Update();
   c1->WaitPrimitive();
   
