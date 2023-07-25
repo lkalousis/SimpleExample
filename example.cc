@@ -100,7 +100,7 @@ Double_t _func( Double_t *x, Double_t *par )
   Double_t Qg = Q + k;
   Double_t sg2 = pow( s, 2.0 ) - ( Q+k )*k;
   
-  for ( Int_t n = 2; n<nlim; n++ )
+  for ( Int_t n=2; n<nlim; n++ )
     {
       Double_t SRn = 0.0;
             
