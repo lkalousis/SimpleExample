@@ -45,7 +45,7 @@ Double_t _gaussexp( Double_t *x, Double_t *par )
 }
 
 Float_t wbin;
-Int_t nlim = 7;
+Int_t nlim = 10;
 
 Double_t _func( Double_t *x, Double_t *par )
 {
