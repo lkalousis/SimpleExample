@@ -256,12 +256,12 @@ Int_t example()
   Int_t ntot = 2.5e+6;
   
   Float_t Q0 = 0.0;
-  Float_t s0 = 21.0;
+  Float_t s0 = 20.0;
     
   Float_t mu = 0.5;
   
   Float_t Q = 120.0;
-  Float_t s = 32.0;
+  Float_t s = 30.0;
   Float_t alpha = 1.0/30.0;
   Float_t w = 0.2;
   
