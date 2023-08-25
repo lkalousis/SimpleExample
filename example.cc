@@ -98,7 +98,7 @@ Double_t _func( Double_t *x, Double_t *par )
 
   Double_t k = s/gn/sqrt( 2.0*TMath::Pi() )*TMath::Exp( -pow( Q, 2.0 )/( 2.0*pow( s, 2.0 ) ) );
   Double_t Qg = Q + k;
-  Double_t sg2 = pow( s, 2.0 ) - ( Q+k )*k;
+  Double_t sg2 = pow( s, 2.0 ) - Qg*k;
   
   for ( Int_t n=2; n<nlim; n++ )
     {
