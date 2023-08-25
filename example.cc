@@ -78,7 +78,7 @@ Double_t _func( Double_t *x, Double_t *par )
   
   
   Double_t omega0 = ( xx - Q0 - alpha*pow( s0, 2.0 ) )/sqrt(2.0)/s0;
-  Double_t SR1 = w*alpha/2.0*TMath::Exp( -alpha*( xx-Q0 )+pow( alpha*s0, 2.0 )/2.0 )*TMath::Erfc( -omega0 );
+  Double_t SR1 = w*alpha/2.0*TMath::Exp( pow( alpha*s0, 2.0 )/2.0 - alpha*( xx-Q0 ) )*TMath::Erfc( -omega0 );
 
   Double_t Q1 = Q0+Q;
   Double_t s12 = pow( s0, 2.0 )+pow( s, 2.0 );
@@ -121,7 +121,7 @@ Double_t _func( Double_t *x, Double_t *par )
 	  Double_t smn2 = pow( s0, 2.0 )+1.0*(n-m)*sg2;
 	  Double_t smn = sqrt( smn2 );
 	  
-	  Double_t cmn = alpha*pow( alpha*smn*sqrt( 2.0 ), m-1.0 )/TMath::Factorial( m-1.0 )/2.0/sqrt( TMath::Pi() );
+	  Double_t cmn = alpha*pow( alpha*smn*sqrt( 2.0 ), m-1.0 )/TMath::Factorial( m-1.0 );
 	  
 	  Double_t psi = ( xx-Qmn )/sqrt(2.0)/smn;
 	  Double_t psi2 = pow( psi, 2.0 );
@@ -129,26 +129,26 @@ Double_t _func( Double_t *x, Double_t *par )
 	  Double_t omega2 = pow( omega, 2.0 );
 	  
 	  Double_t A1m = 1.0*m/2.0;
-	  Double_t A2m = (0.0+m+1.0)/2.0;
+	  Double_t A2m = (m+1.0)/2.0;
 	  
 	  Double_t Imn=0.0;
 	  Double_t hi_limit=25.0;
 	  
 	  if ( omega>=hi_limit )
 	    {
-	      Imn = 2.0*sqrt( TMath::Pi() )*TMath::Exp( omega2-psi2 + ( m-1.0 )*TMath::Log( omega ) );
+	      Imn = TMath::Exp( omega2-psi2 + ( m-1.0 )*TMath::Log( omega ) );
 	      
 	    }
 	  else if ( omega<hi_limit && omega>=0.0  )
 	    {
 	      Double_t t1 = TMath::Gamma( A1m )*gsl_sf_hyperg_1F1( 1.0/2.0-A1m, 1.0/2.0, -omega2 );
 	      Double_t t2 = 2.0*omega*TMath::Gamma( A2m )*gsl_sf_hyperg_1F1( 3.0/2.0-A2m, 3.0/2.0, -omega2 );
-	      Imn = ( t1+t2 )*TMath::Exp( omega2-psi2 );
+	      Imn = 1.0/2.0/sqrt( TMath::Pi() )*( t1+t2 )*TMath::Exp( omega2-psi2 );
 	      
 	    }
 	  else if ( omega<0.0 )
 	    {
-	      Double_t t3 = TMath::Gamma( A1m )*TMath::Gamma( A2m )/sqrt( TMath::Pi() );
+	      Double_t t3 = TMath::Gamma( A1m )*TMath::Gamma( A2m )/( 2.0*TMath::Pi() );
 	      Imn = t3*gsl_sf_hyperg_U( A1m, 1.0/2.0, omega2 )*TMath::Exp( -psi2 );
 	      
 	    }
@@ -167,7 +167,7 @@ Double_t _func( Double_t *x, Double_t *par )
   
   
   Double_t Qs = w/alpha + (1.0-w)*Qg;
-  Double_t ss2 = w/pow( alpha, 2.0 ) + (1-w)*sg2 + w*(1.0-w)*pow( Qg-1.0/alpha, 2.0 );
+  Double_t ss2 = w/pow( alpha, 2.0 ) + (1.0-w)*sg2 + w*(1.0-w)*pow( Qg-1.0/alpha, 2.0 );
       
   for ( Int_t n = nlim; n<65; n++ )
     {
