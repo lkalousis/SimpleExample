@@ -128,7 +128,7 @@ Double_t _func( Double_t *x, Double_t *par )
 	  Double_t omega = ( xx-Qmn-alpha*pow( smn, 2.0 ) )/sqrt(2.0)/smn;
 	  Double_t omega2 = pow( omega, 2.0 );
 	  
-	  Double_t A1m = 1.0*m/2.0;
+	  Double_t A1m = m/2.0;
 	  Double_t A2m = (m+1.0)/2.0;
 	  
 	  Double_t Imn=0.0;
